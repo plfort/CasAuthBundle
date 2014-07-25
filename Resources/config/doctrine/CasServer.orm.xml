@@ -1,0 +1,18 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                    http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+ <mapped-superclass name="PlFort\CasAuthBundle\Entity\CasServer">
+
+        <field name="httpProtocol" column="http_protocol" type="string" length="5" />
+
+        <field name="host" column="host" type="string" length="255"/>
+
+        <field name="port" column="port" type="integer" />
+
+        <field name="protocolVersion" column="cas_version" type="integer" />
+
+        <field name="caCertFile" column="ca_certificate" type="string" length="500"/>
+   </mapped-superclass>
+</doctrine-mapping>

@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<!-- <parameters> </parameters> -->
+	<services>
+
+
+		<service id="cas.auth_manager" class="PlFort\CasAuthBundle\Cas\CasAuthManager" />
+
+
+		<service id="cas.security.authentication.provider"
+			class="PlFort\CasAuthBundle\Security\Core\Authentication\CasAuthProvider"
+			public="false">
+			<argument type="service" id="cas.auth_manager" />
+			<argument type="service" id="security.user_checker" />
+			<argument /> <!-- User Provider -->
+			<argument /> <!-- CasServerProviderInterface -->
+
+		</service>
+
+		<service id="cas.security.authentication.listener"
+			class="PlFort\CasAuthBundle\Security\Firewall\CasAuthListener"
+			abstract="true" parent="security.authentication.listener.abstract"
+			public="false">
+
+		</service>
+
+		<service id="cas.security.authentication.cas_auth_entry_point"
+			class="PlFort\CasAuthBundle\Security\Http\CasAuthEntryPoint" public="false">
+			<argument /> <!-- CasServerProviderInterface -->
+
+		</service>
+
+	</services>
+</container>

@@ -1,0 +1,25 @@
+{
+    "name": "plfort/casauthbundle",
+    "description": "Use CAS authentification system",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Pierre-Louis FORT",
+            "email": "fort.pierrelouis@gmail.com"
+        }
+    ],
+    "require": {
+       "php": ">=5.3.3",
+       "guzzlehttp/guzzle": "~4.0"
+       
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+		"mikey179/vfsStream": "1.3.*@dev"
+        
+    },
+    "autoload": {
+        "psr-0": {"PlFort\\CasAuthBundle": ""}
+    },
+    "target-dir": "PlFort/CasAuthBundle"
+}
