@@ -2,13 +2,8 @@
 namespace PlFort\CasAuthBundle\Security\Firewall;
 
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\HttpFoundation\Response;
 use PlFort\CasAuthBundle\Security\Core\Token\CasAuthToken;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Http\Firewall\AbstractPreAuthenticatedListener;
 use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener;
 use PlFort\CasAuthBundle\Security\Http\CasAuthEntryPoint;
 

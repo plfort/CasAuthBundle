@@ -2,7 +2,6 @@
 namespace PlFort\CasAuthBundle\Cas\ServerProvider\Doctrine;
 
 use PlFort\CasAuthBundle\Cas\ServerProvider\CasServerProviderInterface;
-use PlFort\CasAuthBundle\Cas\CasServer;
 use Doctrine\Common\Persistence\ObjectRepository;
 
 class DoctrineCasServerProvider implements CasServerProviderInterface

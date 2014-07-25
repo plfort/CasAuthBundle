@@ -5,8 +5,6 @@ use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use PlFort\CasAuthBundle\Cas\ServerProvider\CasServerProviderInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use PlFort\CasAuthBundle\Cas\CasAuthManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CasAuthEntryPoint implements AuthenticationEntryPointInterface

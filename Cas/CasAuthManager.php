@@ -49,6 +49,7 @@ class CasAuthManager
         $response = $this->httpClient->get($casServer->getValidateUrl(), $requestParam);
         if ($response) {
             $dom = new \DOMDocument();
+           
             if (@$dom->loadXML($response->getBody()) && @$dom->schemaValidate(__DIR__ . '/cas.xsd')) {
                 
                 $tree = $dom->documentElement;

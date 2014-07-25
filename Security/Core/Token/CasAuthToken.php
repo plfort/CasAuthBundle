@@ -2,7 +2,6 @@
 namespace PlFort\CasAuthBundle\Security\Core\Token;
 
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
-use PlFort\CasAuthBundle\Cas\CasServerInterface;
 
 class CasAuthToken extends AbstractToken
 {
