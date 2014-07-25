@@ -9,9 +9,9 @@
         }
     ],
     "require": {
-       "php": ">=5.3.3",
+       "php": ">=5.4",
        "guzzlehttp/guzzle": "~4.0",
-	   "symfony/framework-bundle":     "~2.3",
+	   "symfony/framework-bundle":     ">=2.3",
 	   "symfony/security-bundle":      "~2.1",
 	   "symfony/options-resolver":     "~2.1"
 
