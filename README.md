@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/plfort/CasAuthBundle.svg?branch=master)](https://travis-ci.org/plfort/CasAuthBundle)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/cb08d543-4808-47b2-94ea-799b49a1e08a/big.png)](https://insight.sensiolabs.com/projects/cb08d543-4808-47b2-94ea-799b49a1e08a)
 CasAuthBundle
 =============
 
