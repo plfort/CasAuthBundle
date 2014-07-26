@@ -2,7 +2,7 @@
 	"name" : "plfort/casauthbundle",
 	"description" : "Use CAS authentification system",
 	"type" : "symfony-bundle",
-	"license": "MIT",
+	"license" : "MIT",
 	"authors" : [{
 			"name" : "Pierre-Louis FORT",
 			"email" : "fort.pierrelouis@gmail.com"
@@ -13,7 +13,8 @@
 		"guzzlehttp/guzzle" : "~4.0",
 		"symfony/framework-bundle" : ">=2.3",
 		"symfony/security-bundle" : "~2.1",
-		"symfony/options-resolver" : "~2.1"
+		"symfony/options-resolver" : "~2.1",
+		"symfony/config": "~2.1"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "3.7.*",

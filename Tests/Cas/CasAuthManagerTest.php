@@ -16,10 +16,26 @@ class CasAuthManagerTest extends \PHPUnit_Framework_TestCase
 
     protected $casAuthManager;
 
+    protected $fileLocator;
+
     protected function setUp()
     {
         $this->httpClient = $this->getMockHttpClient();
+        $this->fileLocator = $this->getMockFileLocator();
+
         $this->casAuthManager = $this->getCasAuthManager();
+    }
+
+    protected function getMockFileLocator()
+    {
+        $fileLocator = $this->getMockBuilder('Symfony\Component\Config\FileLocatorInterface')
+        ->getMock();
+        $fileLocator->expects($this->any())
+        ->method('locate')
+        ->with('@CasAuthBundle/Cas/cas.xsd')
+        ->will($this->returnValue(__DIR__.'/../../Cas/cas.xsd'));
+        return $fileLocator;
+
     }
 
     protected function getMockHttpClient()
@@ -34,7 +50,7 @@ class CasAuthManagerTest extends \PHPUnit_Framework_TestCase
 
     protected function getCasAuthManager()
     {
-        $casAuthManager = new CasAuthManager();
+        $casAuthManager = new CasAuthManager($this->fileLocator);
         $reflectionCasAuthManager = new \ReflectionClass('PlFort\CasAuthBundle\Cas\CasAuthManager');
         $httpClientProperty = $reflectionCasAuthManager->getProperty('httpClient');
         $httpClientProperty->setAccessible(true);
@@ -65,30 +81,30 @@ class CasAuthManagerTest extends \PHPUnit_Framework_TestCase
     public function test_validateTicketVerifyCaCert()
     {
         vfsStreamWrapper::register();
-        
+
         vfsStreamWrapper::setRoot(new vfsStreamDirectory('rootDir'));
         vfsStream::create(array(
             'cert' => array(
                 'ca.crt' => 'CERTIFICATE'
             )
         ));
-        
+
         $caCertFile = vfsStream::url('rootDir/cert/ca.crt');
-        
+
         $casServer = $this->getMockCasServer();
         $casServer->expects($this->once())
             ->method('getCaCertFile')
             ->will($this->returnValue($caCertFile));
-        
+
         $casServerProvider = $this->getMockCasServerProvider();
-        
+
         $casServerProvider->expects($this->once())
             ->method('getCasServer')
             ->with('casServerId')
             ->will($this->returnValue($casServer));
-        
+
         $token = new CasAuthToken('ticketid', 'casServerId', 'serviceid');
-        
+
         $requestParam = array(
             'query' => array(
                 'ticket' => 'ticketid',
@@ -96,20 +112,20 @@ class CasAuthManagerTest extends \PHPUnit_Framework_TestCase
             ),
             'verify' => $caCertFile
         );
-        
+
         $this->httpClient->expects($this->once())
             ->method('get')
             ->with('http://cas.server.com/validate', $requestParam);
-        
+
         $this->casAuthManager->validateTicket($casServerProvider, $token);
     }
 
     public function test_notXmlResponse()
     {
         $casServer = $this->getMockCasServer();
-        
+
         $casServerProvider = $this->getMockCasServerProvider();
-        
+
         $casServerProvider->expects($this->once())
             ->method('getCasServer')
             ->with('casServerId')
@@ -121,17 +137,17 @@ class CasAuthManagerTest extends \PHPUnit_Framework_TestCase
                 'service' => 'serviceid'
             )
         );
-        
+
         $response = $this->getMock('GuzzleHttp\Message\ResponseInterface');
         $response->expects($this->any())
             ->method('getBody')
             ->will($this->returnValue('This is not XML'));
-        
+
         $this->httpClient->expects($this->once())
             ->method('get')
             ->with('http://cas.server.com/validate', $requestParam)
             ->will($this->returnValue($response));
-        
+
         $this->assertFalse($this->casAuthManager->validateTicket($casServerProvider, $token));
     }
 
@@ -146,9 +162,9 @@ class CasAuthManagerTest extends \PHPUnit_Framework_TestCase
             </cas:serviceResponse>
 EOT;
         $casServer = $this->getMockCasServer();
-        
+
         $casServerProvider = $this->getMockCasServerProvider();
-        
+
         $casServerProvider->expects($this->once())
             ->method('getCasServer')
             ->with('casServerId')
@@ -160,17 +176,17 @@ EOT;
                 'service' => 'serviceid'
             )
         );
-        
+
         $response = $this->getMock('GuzzleHttp\Message\ResponseInterface');
         $response->expects($this->any())
             ->method('getBody')
             ->will($this->returnValue($stringResponse));
-        
+
         $this->httpClient->expects($this->once())
             ->method('get')
             ->with('http://cas.server.com/validate', $requestParam)
             ->will($this->returnValue($response));
-        
+
         $this->assertFalse($this->casAuthManager->validateTicket($casServerProvider, $token));
     }
 
@@ -185,9 +201,9 @@ EOT;
             </cas:serviceResponse>
 EOT;
         $casServer = $this->getMockCasServer();
-        
+
         $casServerProvider = $this->getMockCasServerProvider();
-        
+
         $casServerProvider->expects($this->once())
             ->method('getCasServer')
             ->with('casServerId')
@@ -199,17 +215,17 @@ EOT;
                 'service' => 'serviceid'
             )
         );
-        
+
         $response = $this->getMock('GuzzleHttp\Message\ResponseInterface');
         $response->expects($this->any())
             ->method('getBody')
             ->will($this->returnValue($stringResponse));
-        
+
         $this->httpClient->expects($this->once())
             ->method('get')
             ->with('http://cas.server.com/validate', $requestParam)
             ->will($this->returnValue($response));
-        
+
         $this->assertEquals('TheUsername', $this->casAuthManager->validateTicket($casServerProvider, $token));
     }
 }

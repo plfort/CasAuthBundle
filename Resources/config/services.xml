@@ -7,8 +7,9 @@
 	<!-- <parameters> </parameters> -->
 	<services>
 
-
-		<service id="cas.auth_manager" class="PlFort\CasAuthBundle\Cas\CasAuthManager" />
+		<service id="cas.auth_manager" class="PlFort\CasAuthBundle\Cas\CasAuthManager">
+		    <argument type="service" id="file_locator" />
+	    </service>
 
 
 		<service id="cas.security.authentication.provider"
