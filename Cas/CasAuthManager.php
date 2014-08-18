@@ -75,7 +75,7 @@ class CasAuthManager
 
     private function getSchema()
     {
-        return $this->fileLocator->locate('@CasAuthBundle/Cas/cas.xsd');
+        return $this->fileLocator->locate('@PlFortCasAuthBundle/Cas/cas.xsd');
     }
 
 }
