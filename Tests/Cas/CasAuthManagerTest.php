@@ -32,7 +32,7 @@ class CasAuthManagerTest extends \PHPUnit_Framework_TestCase
         ->getMock();
         $fileLocator->expects($this->any())
         ->method('locate')
-        ->with('@CasAuthBundle/Cas/cas.xsd')
+        ->with('@PlFortCasAuthBundle/Cas/cas.xsd')
         ->will($this->returnValue(__DIR__.'/../../Cas/cas.xsd'));
         return $fileLocator;
 
