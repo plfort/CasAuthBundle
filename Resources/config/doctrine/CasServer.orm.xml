@@ -13,6 +13,6 @@
 
         <field name="protocolVersion" column="cas_version" type="integer" />
 
-        <field name="caCertFile" column="ca_certificate" type="string" length="500"/>
+        <field name="caCertFile" column="ca_certificate" type="string" length="500" nullable="true"/>
    </mapped-superclass>
 </doctrine-mapping>
