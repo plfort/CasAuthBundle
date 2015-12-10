@@ -50,7 +50,7 @@ class CasAuthManager
                 $requestParam['verify'] = $caCert;
             }
         }
-        $response = $this->httpClient->get($casServer->getValidateUrl(), $requestParam);
+        $response = $this->httpClient->request('GET',$casServer->getValidateUrl(), $requestParam);
         if ($response) {
             $dom = new \DOMDocument();
 
