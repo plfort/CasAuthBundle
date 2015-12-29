@@ -54,7 +54,7 @@ class CasAuthManager
         if ($response) {
             $dom = new \DOMDocument();
 
-            if (@$dom->loadXML($response->getBody()) && @$dom->schemaValidate($this->getSchema())) {
+            if (@$dom->loadXML($response->getBody()) /*&& @$dom->schemaValidate($this->getSchema())*/) {
 
                 $tree = $dom->documentElement;
 
